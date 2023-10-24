@@ -1,0 +1,41 @@
+This project implements loading multiple CSV files, reading them into a new combined file
+and then searching through that combined file for specific keywords. It also stores
+the history and frequency of the searched terms and prints them out.
+
+The program has multiple methods used to facilitate this process.
+
+The 'readfile' method opens a CSV file and reads the contents,
+line by line, into an ArrayList.
+
+The 'searchForSubstringCSV' method determines if a substring ('tag') is found
+in the 'input' String passed to it. It also receives the value of an int 'counter'
+to print out how many matches it has found.
+
+The 'addToSearchHistory' method adds the timestamp at which a term is searched to 'searchHistory'.
+If the term has not been searched yet, it creates a new ArrayList and adds the
+timestamp it, then adding the ArrayList to the HashMap with the tag as the key.
+If the term has already been searched, it calls the ArrayList that is already stored,
+adds the new timestamp, and updates the HashMap.
+
+The 'addToSearchFrequency' method updates the frequency of a search term in 'searchFrequency'.
+If the term has already been searched, it gets the currently stored frequency and
+increases it by one, then updates the HashMap. If it has not, it simply stores 1
+as the frequency.
+
+The 'printSearchHistoryFrequency' method does exactly what it says. It retrieves both
+the search frequency and history of each tag and prints it to the console.
+
+First the program calls 'readfile' on the first of two CSVs, opens a new File,
+and writes the contents of the original file into the newly opened file. Then,
+the program calls 'readfile' on the second CSV and writes the contents into the
+still open writer file.
+
+Following this, the program calls 'readfile' again on the newly created CSV of
+the two merged original CSVs. It then loops through each line stored in the lines
+ArrayList and sees if a particular 'tag' is present in that line by calling the
+'searchForSubstringCSV' method. It does this on multiple different tags.
+
+After each time a tag has been searched, the program calls the 'addToSearchHistory' and
+'addToSearchFrequency' methods in order to properly update the respective HashMaps.
+
+Finally, it calls 'printSearchHistoryFrequency' to output that information to the user.
